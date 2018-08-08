@@ -1,0 +1,474 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    
+    
+    
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=EUC-JP">
+    <meta http-equiv="Content-Style-Type" content="text/css">
+    
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="wiki.cgi?action=RSS">
+
+    
+    
+      <link rel="stylesheet" type="text/css" href="./theme/default/default.css">
+    
+    
+    
+      <style type="text/css">
+      <!--
+      /* エラーメッセージ */
+.error {
+  color       : #FF0000;
+  font-weight : bold;
+}
+
+/* 存在しないWikiページ */
+span.nopage {
+  background-color : #FFFF88;
+}
+
+/* Wikiページへのアンカ */
+a.wikipage:link {
+  text-decoration : underline;
+}
+
+a.wikipage:visited {
+  text-decoration : underline;
+}
+
+a.wikipage:hover {
+  background-color: #DDDDDD;
+  text-decoration : underline;
+}
+
+/* parteditプラグイン */
+div.partedit {
+  text-align : right;
+  font-size  : 80%;
+}
+
+/* calendarプラグイン */
+td.today {
+  background-color : #FF8888;
+}
+
+td.have {
+  font-weight : bold;
+}
+
+.calendar td {
+  text-align : right;
+}
+
+
+blockquote {
+  font-style: normal;
+  font-family: monospace;
+}
+
+pre {
+}
+
+      -->
+      </style>
+    
+    
+    <title>第2回レポート課題 - Programming C</title>
+  </head>
+  <body>
+  
+  
+    <div class="main">
+  
+  
+  <!--========================================================================-->
+<!-- ヘッダ（メニューを表示） -->
+<!--========================================================================-->
+<div class="adminmenu">
+  
+    
+    <span class="adminmenu">
+      <a href="wiki.cgi?page=Programming+C">
+      
+        トップ
+      
+      </a>
+    </span>
+    
+  
+    
+  
+    
+    <span class="adminmenu">
+      <a href="wiki.cgi?action=LIST">
+      
+        一覧
+      
+      </a>
+    </span>
+    
+  
+    
+  
+    
+    <span class="adminmenu">
+      <a href="wiki.cgi?action=SEARCH" rel="nofollow">
+      
+        検索
+      
+      </a>
+    </span>
+    
+  
+    
+    <span class="adminmenu">
+      <a href="wiki.cgi?page=Help">
+      
+        ヘルプ
+      
+      </a>
+    </span>
+    
+  
+    
+    <span class="adminmenu">
+      <a href="wiki.cgi?action=PDF&amp;page=%C2%E82%B2%F3%A5%EC%A5%DD%A1%BC%A5%C8%B2%DD%C2%EA" rel="nofollow">
+      
+        PDF
+      
+      </a>
+    </span>
+    
+  
+    
+    <span class="adminmenu">
+      <a href="wiki.cgi?action=RSS" rel="nofollow">
+      
+        RSS
+      
+      </a>
+    </span>
+    
+  
+    
+    <span class="adminmenu">
+      <a href="wiki.cgi?action=LOGIN">
+      
+        ログイン
+      
+      </a>
+    </span>
+    
+  
+</div>
+
+  
+  <h1><a href="wiki.cgi?action=SEARCH&amp;word=%C2%E82%B2%F3%A5%EC%A5%DD%A1%BC%A5%C8%B2%DD%C2%EA">第2回レポート課題</a></h1>
+  
+  
+    
+  
+  
+  <div class="day">
+    <div class="body">
+      <div class="section">
+        <p>以下の課題についてレポートを作成し提出せよ。 なお、<a href="hosoku.html" class="wikipage">補足資料</a>を用意しているので、必ず目を通すこと。</p>
+<h2><a name="p0">[課題]サブセット版のシェルを作成せよ。</a></h2>
+<p>シェル（コマンドインタプリタ）は UNIX ユーザにとって最も重要なプログラムである。 UNIX には、sh, csh, tcsh, bash など様々な種類のシェルが存在し、中にはファイル名の補完やヒストリなどの便利な機能を有したシェルもある。このようなシェルのサブセット版として以下の機能を有するシェルをC言語を用いて作成せよ。 </p>
+<h3><a name="p1">外部コマンドの実行機能</a></h3>
+<p>コマンドとして指定した別のプログラム（ls, firefox, kterm など）を実行できるようにする。</p>
+<h3><a name="p2">ディレクトリの管理機能</a></h3>
+<h4><a name="p3">cdコマンド</a></h4>
+<p>cd (Change Directory) コマンドを作成し、カレントディレクトリを変更できるようにする。</p>
+<dl>
+<dt>[仕様]</dt>
+<dd>ディレクトリ名が指定された場合は、そのディレクトリへカレントディレクトリを移動する。ディレクトリ名が指定されなかった場合は、環境変数 HOME に指定されたディレクトリへカレントディレクトリを移動する。ディレクトリの指定は絶対パス、相対パスのどちらでも可能なようにする。</dd>
+</dl>
+<pre>cd [ディレクトリ名]
+</pre>
+<h4><a name="p4">pushdコマンド</a></h4>
+<p>pushd (Push Directory) コマンドを作成し、ディレクトリスタックへカレントディレクトリを保存できるようにする。</p>
+<dl>
+<dt>[仕様]</dt>
+<dd>ディレクトリスタックへカレントディレクトリを保存する。</dd>
+</dl>
+<pre>pushd
+</pre>
+<h4><a name="p5">dirsコマンド</a></h4>
+<p>dirs (Directory Stack) コマンドを作成し、現在のディレクトリスタックを表示できるようにする。</p>
+<dl>
+<dt>[仕様]</dt>
+<dd>現在のディレクトリスタックを、スタックの上（最初に取り出される方）から順に表示する。</dd>
+</dl>
+<pre>dirs
+</pre>
+<h4><a name="p6">popdコマンド</a></h4>
+<p>popd (Pop Directory) コマンドを作成し、現在のディレクトリスタックの1番上のディレクトリをカレントディレクトリに設定する。 </p>
+<dl>
+<dt>[仕様]</dt>
+<dd>現在のディレクトリスタックの1番上のディレクトリをカレントディレクトリに設定する。取り出したディレクトリはスタックから削除する。</dd>
+</dl>
+<pre>popd
+</pre>
+<h3><a name="p7">ヒストリ機能 </a></h3>
+<h4><a name="p8"> historyコマンド</a></h4>
+<p>history コマンドによってこれまでに実行したコマンドを、実行した順番とともに表示できるようにする。</p>
+<dl>
+<dt>[仕様]</dt>
+<dd>シェルを起動してから実行したコマンドをヒストリとして実行した順番とともに保存しておき、それを古いもの（番号の小さいもの）から順に表示する。なお、ヒストリとして保存するコマンドの数は 32 個とし、コマンドとともに保持する順番はシェル起動時を基準とした順番とする。</dd>
+</dl>
+<pre>history
+</pre>
+<h4><a name="p9"> !!</a></h4>
+<p>　!!コマンドによって1つ前のコマンドを再度実行できるようにする。</p>
+<dl>
+<dt>[仕様]</dt>
+<dd>シェルを起動してから実行したコマンドをヒストリとして実行した順番とともに保存しておき、 1つ前に実行したコマンドを再度実行できるようにする。再度実行したコマンドも新たにヒストリに追加する。</dd>
+</dl>
+<pre>!!
+</pre>
+<h4><a name="p10"> !string</a></h4>
+<p>ヒストリに保存されたコマンドの内、stringで始まる最新のコマンドを実行する。stringsは1文字以上の任意の文字列である。</p>
+<dl>
+<dt>[仕様]</dt>
+<dd>シェルを起動してから実行したコマンドをヒストリとして実行した順番とともに保存しておき、 stringで始まる最新のコマンドを再度実行できるようにする。stringで始まるコマンドがない場合には、エラーメッセージを表示する。ただし、stringで始まるコマンドがあるかないかの判定は、historyコマンドで保存している履歴の範囲ないで判断してよい。また、再度実行したコマンドも新たにヒストリに追加する。</dd>
+</dl>
+<pre>!string
+</pre>
+<p>例えば、以下のコマンドを実行していたとする。</p>
+<pre>ls -a
+pushd
+ls -l
+cat test.txt
+popd
+ls
+</pre>
+<p>このときに、</p>
+<pre>!l
+</pre>
+<p>を実行すると、ls が実行され、</p>
+<pre>!p
+</pre>
+<p>を実行すると、popd が実行され、</p>
+<pre>!pu
+</pre>
+<p>を実行すると、pushd が実行される。</p>
+<h3><a name="p11">ワイルド・カード機能</a></h3>
+<p>記号 &quot;*&quot; によってファイル名を補完する機能を実現する。</p>
+<dl>
+<dt>[仕様]</dt>
+<dd>コマンドにある &quot;*&quot; をカレントディレクトリにある全てのファイル名に置換する。例えば、カレントディレクトリにfile1.txt, file2.txt, file3.txtという三つのファイルがある場合に、</dd>
+</dl>
+<pre>cp * ../dir/
+</pre>
+<p>を</p>
+<pre>cp file1.txt file2.txt file3.txt ../dir/
+</pre>
+<p>というように置換する。</p>
+<p>補完するパターンは以下に挙げるものとする。</p>
+<h4><a name="p12"> *</a></h4>
+<p>カレントディレクトリにある全てのファイル名 </p>
+<h3><a name="p13">プロンプトの変更機能</a></h3>
+<p>prompt コマンドによってプロンプトを変更できるようにする。</p>
+<dl>
+<dt>[仕様]</dt>
+<dd>strings によって指定された文字列にプロンプトを変更する。文字列が指定されなかった場合は、デフォルトの文字列 &quot;prompt&quot;に変更する。</dd>
+</dl>
+<pre>prompt [strings]
+</pre>
+<h3><a name="p14">スクリプト機能</a></h3>
+<p>1行に1つのコマンドを記述したテキストファイルを標準入力から読み込み、実行する。</p>
+<dl>
+<dt>[仕様]</dt>
+<dd>作成したシェルmyshが、script_fileに記述されたコマンドを実行する。 exitがなくても正常終了することが必要である。通常のシェルでは、標準入力が端末でない場合にはプロンプトを出力しないが、本課題では端末の場合と同様にプロンプトを出力しても良い。</dd>
+</dl>
+<pre>mysh &lt; script_file
+</pre>
+<p>なお、mysh は、作成するシェル上のコマンド名ではなく、作成するシェルのファイル名である。すなわち、スクリプト機能はシェル上のコマンドとして実装するのではなく、作成するシェルが標準入力から1行に1つのコマンドを記述したテキストファイルを読み込む機能として実装すること。</p>
+<h3><a name="p15">エイリアス機能</a></h3>
+<h4><a name="p16"> alias</a></h4>
+<p>alias コマンドによってコマンドの別名を設定できるようにする。</p>
+<dl>
+<dt>[仕様]</dt>
+<dd>command1 が入力されたときに、command2に置き換えて実行する。</dd>
+</dl>
+<pre>alias [command1 command2]
+</pre>
+<p>例えば、</p>
+<pre>alias sl ls
+</pre>
+<p>とすると、それ以降</p>
+<pre>sl
+</pre>
+<p>と入力しても、</p>
+<pre>ls
+</pre>
+<p>が実行される。また、引数なしで aliasコマンドを実行した場合には、現在登録されている alias の一覧を表示すること。</p>
+<pre>alias
+sl  ls
+cls clear
+md  mkdir
+</pre>
+<h4><a name="p17"> unalias</a></h4>
+<p>unalias コマンドによって、別名設定された command1 を解除する。</p>
+<pre>unalias command1
+</pre>
+<h3><a name="p18">自分で考えた機能（1つ）</a></h3>
+<p>上述の機能以外に、他のシェルなどを参考にして自分で考えた機能を1つ追加する。</p>
+<p>ただし、上記で指定した機能の亜種は認めない。例えば、ヒストリーを逆順で表示する「rhistoryコマンド」を考えたとする。これは、自分で考えた「機能」ではなく、単なるhistoryコマンドの表示方法である。機能発案の創造性を問う課題ではないので、有用な機能である必要はなく、また、既存のシェルに実装されている機能を禁止するものでもない。課題で指定されたコマンドの亜種ではなく、自身で機能を考えることが重要である。</p>
+<hr>
+<p>なお、余力のある者は以下の機能を実現せよ。 </p>
+<h3><a name="p19">ヒストリ機能の拡張 </a></h3>
+<h4><a name="p20"> !n</a></h4>
+<p>　!n （n は数字）コマンドによって n で指定した順番に実行したコマンドを再度実行できるようにする。</p>
+<h4><a name="p21"> !-n</a></h4>
+<p>　!-n （n は数字）コマンドによって n 個前のコマンドを再度実行できるようにする。</p>
+<h3><a name="p22">ワイルドカード機能の拡張 </a></h3>
+<h4><a name="p23"> strings*</a></h4>
+<p>　カレントディレクトリにあるファイル名の前の部分が strings にマッチする全てのファイル名を補完する。stringsは、1文字以上の任意の文字列である。</p>
+<h4><a name="p24"> *strings</a></h4>
+<p>　カレントディレクトリにあるファイル名の後ろの部分が strings にマッチする全てのファイル名を補完する。stringsは、1文字以上の任意の文字列である。</p>
+<h2><a name="p25">提出物</a></h2>
+<p>レポートに関する提出物は、ハードコピー（紙媒体レポート）と電子ファイルの2種類である。以下の注意点を読んで、それぞれのファイルを提出せよ。</p>
+<h4><a name="p26"> 紙媒体レポート</a></h4>
+<p>ハードコピーレポートは <a href="wiki.cgi?page=%A5%EC%A5%DD%A1%BC%A5%C8%BA%EE%C0%AE%BE%E5%A4%CE%C3%ED%B0%D5" class="wikipage">レポート作成上の注意</a> に従い LaTeX で作成せよ。また、レポートには以下の内容を忘れずに含めること。</p>
+<ol>
+<li> 課題内容</li>
+<li> プログラム全体の説明<ol>
+<li> 仕様</li>
+<li> 処理の流れ（処理概要）</li>
+<li> 実装方法</li>
+</ol>
+<li> 外部コマンドの実行機能<ol>
+<li> 仕様</li>
+<li> 処理の流れ（処理概要）</li>
+<li> 実装方法</li>
+<li> テスト（テスト方法とテスト結果を両方書くこと）</li>
+</ol>
+<li> ディレクトリの管理機能<ol>
+<li> 仕様</li>
+<li> 処理の流れ（処理概要）</li>
+<li> 実装方法</li>
+<li> テスト（テスト方法とテスト結果を両方書くこと）</li>
+</ol>
+<li> ヒストリー機能<ol>
+<li> 仕様</li>
+<li> 処理の流れ（処理概要）</li>
+<li> 実装方法</li>
+<li> テスト（テスト方法とテスト結果を両方書くこと）</li>
+</ol>
+<li> 以下同様に、ワイルドカード機能、プロンプト機能など、それぞれの機能に対して、仕様・処理の流れ・実装方法・テスト結果(<strong>特に自分で考えた機能については、コマンド名、どのような機能であるか、どのようにして実現しているか、などを詳しく書くこと。</strong>)</li>
+<li> 工夫点</li>
+<li> 考察</li>
+<li> 感想</li>
+<li> 謝辞（必要に応じて）</li>
+<li> 参考文献（必要に応じて）</li>
+<li> プログラムリスト(付録として添付)</li>
+</ol>
+<p>レポート2の内容は<a href="wiki.cgi?action=ATTACH&amp;page=%C2%E82%B2%F3%A5%EC%A5%DD%A1%BC%A5%C8%B2%DD%C2%EA&amp;file=report2%2Epdf">report2.pdf</a>(285)を参考にすること。</p>
+<p>なお、今回のレポートのページ数の上限は表紙・付録抜きで<strong>20枚以内</strong>とする。 </p>
+<h4><a name="p27"> 電子ファイル</a></h4>
+<p>以下のディレクトリ配下に各自のユーザ名を名前とするディレクトリが作成してある。</p>
+<pre>/home/exp/exppub/exp-material/PC2016/Report2 
+</pre>
+<p>その直下に以下のファイル名の電子ファイルを提出すること。</p>
+<ol>
+<li> mysh.c: プログラムのソースコード</li>
+<li> mysh: 実行形式のサブセット版シェルプログラム</li>
+<li> report2.tex: レポートの LaTeXソースファイル</li>
+<li> report2.pdf: レポートの PDFファイル</li>
+</ol>
+<p>提出ファイルについては、以下の事項を遵守すること。</p>
+<ul>
+<li> 指定されたファイル名を遵守すること（<strong>ファイル名が異なっている場合は、当該ファイルを未提出扱いとする</strong>）</li>
+<li> 上記のディレクトリには最終結果のファイルだけを置き、作成段階のレポートの LaTeX ソースファイルや、Emacs のバックアップファイルなどの不必要なファイルを置いてはならない（<strong>不要なファイルが置かれている場合には減点対象とする</strong>）<ul>
+<li> プログラムや、LaTeXソースコードを分割した場合は、この限りではない。ただし、この場合は、プログラムについてはmysh.c に main関数、LaTeXについては、report2.texをメインファイルとし、README.txt に実行形式やPDFファイルの作成方法（コンパイル方法）を記述すること。makeを用いる場合は、makefileなどを置いても良い。また、レポートに図を用いた場合は、図ファイルも当該ディレクトリに置くこと。</li>
+</ul>
+<li> mysh 実行形式ファイルは、演習室の環境で実行できる形式にすること（<strong>Windows EXE形式や、Linux ELF形式などの場合は採点できないため、未完成の扱いとする</strong>）</li>
+<li> ファイルを指定ディレクトリに置く際にパーミッションに注意すること（<strong>パーミッションが正しく設定されていないため、教員、TAがファイルの中身を見ることができない、実行ファイルを実行できない、といった場合にはファイルが提出されていないものとみなす</strong>）</li>
+<li> プログラムの動作確認は必ず演習室の環境で行うこと．自分の手元の環境で動作したが，演習室の環境で教員，TAが動作確認ができない場合は，上記と同様にファイルが提出されていないものとみなす．</li>
+</ul>
+<h4><a name="p28">[提出先]</a></h4>
+<p>計算機・ソフトウェア事務室 </p>
+<h4><a name="p29">[提出期限]</a></h4>
+<p>2016年8月6日（木） 16:30 </p>
+<p>（レポート提出後に再提出が必要な場合などの連絡は基本的にメールで行なうので、レポートの提出締切後1週間くらいはメールをこまめにチェックしておくように）</p>
+<h2><a name="p30">[補足事項]</a></h2>
+<p>自分で考えた機能を2つ以上追加した場合には、追加分の各機能について、その機能の便利さや複雑さなどを考慮して1ｸA卦点の範囲でボーナス得点を与えることとする。ボーナス得点は満点を超えても加算するので、これまでのレポート課題での失点を挽回可能である。 </p>
+<h2><a name="p31">[ヒント]</a></h2>
+<ul>
+<li>別のプログラムを実行する機能のみを有する簡易版シェルに関する<a href="wiki.cgi?page=%C2%E82%B2%F3%A5%EC%A5%DD%A1%BC%A5%C8%B2%DD%C2%EA%CA%E4%C2%AD" class="wikipage">補足資料</a> を用意しているので、それを参考にすること。 </li>
+<li>カレントディレクトリの取得は getcwd 関数により実現できる。オンラインマニュアルを参照し、関連項目として出てくる関数などを用いてディレクトリ操作を実現せよ。 </li>
+<li>ホームディレクトリの取得は getenv 関数により実現できる。詳しくは、オンラインマニュアルを参照せよ。 </li>
+<li>スクリプト機能については、他のコマンドと違って、シェル上での新しいコマンドとして実装する必要はなく、基本的にEOFを検出して終了する機能を実装すれば良い。</li>
+<li>リストや配列を使用するに当たってメモリを動的に確保した場合には、プログラム終了時に必ずメモリ解放を行うようにすること。メモリ解放忘れがある場合には減点対象とするので注意すること。</li>
+<li>スタックは単方向リストを使えば実現できる。以下の図を参考にせよ。</li>
+</ul>
+<div><img src="wiki.cgi?action=ATTACH&amp;page=%C2%E82%B2%F3%A5%EC%A5%DD%A1%BC%A5%C8%B2%DD%C2%EA&amp;file=stack.gif"></div>
+<ul>
+<li>ヒストリの管理は単方向リストか配列によって実現する。 </li>
+<li>ワイルド・カードの補完は、 opendir, readdir, closedir などの関数でそのディレクトリのファイル名を取得して、それとの比較で実現できる。 </li>
+<li>ファイル名などの文字列の比較は、strcmp に代表される文字列操作関数を利用すればよい。文字列操作関数については、詳しくはオンラインマニュアルの 3 章の string を調べよ（man 3 string で調べられる）。 </li>
+</ul>
+
+      </div>
+    </div>
+    
+      
+    
+  </div>
+
+  <!--========================================================================-->
+<!-- フッタ -->
+<!--========================================================================-->
+<div class="footer">
+  
+  <!-- 管理者の情報 -->
+  
+    Copyright (C) 2002-2016
+    
+      <a href="mailto:pro-c-as@ics.es.osaka-u.ac.jp">
+        樽谷 優弥・ｸb惜棍真佑
+      </a>
+    
+    <br>
+  
+  
+  <!-- FSWikiのバージョン情報 -->
+  Powered by <a href="http://fswiki.poi.jp/">FreeStyleWiki3.6.2</a>
+    with Perl5.020003
+  
+  
+</div>
+
+
+  
+    </div>
+    <div class="sidebar">
+      <h2><a href="wiki.cgi?page=Menu" class="wikipage">メニュー</a></h2>
+<ul>
+<li><a href="wiki.cgi?page=Programming+C" class="wikipage">トップページ</a></li>
+<li><a href="wiki.cgi?page=%B1%E9%BD%AC%C6%FC%C4%F8" class="wikipage">演習日程</a></li>
+<li><a href="wiki.cgi?page=%B1%E9%BD%AC%B2%DD%C2%EA" class="wikipage">演習課題</a></li>
+<li><a href="wiki.cgi?page=%A5%EC%A5%DD%A1%BC%A5%C8%B2%DD%C2%EA" class="wikipage">レポート課題</a></li>
+<li><a href="wiki.cgi?page=TA%C3%B4%C5%F6%C9%BD" class="wikipage">TA担当表</a> <a href="wiki.cgi?page=TA%C3%B4%C5%F6%C9%BD%28%B3%D8%C0%B8%BD%E7%29" class="wikipage">(学生順)</a></li>
+<li><a href="wiki.cgi?page=%C3%ED%B0%D5%BB%F6%B9%E0" class="wikipage">注意事項</a></li>
+<li><a href="wiki.cgi?page=%BC%C1%CC%E4%A4%CE%BB%C5%CA%FD%A4%CB%A4%C4%A4%A4%A4%C6" class="wikipage">質問の仕方について</a></li>
+<li><a href="wiki.cgi?page=%C7%DB%C9%DB%BB%F1%CE%C1" class="wikipage">配布資料</a></li>
+<li><a href="wiki.cgi?page=%C3%B4%C5%F6%B6%B5%B0%F7" class="wikipage">担当教員</a></li>
+<li><a href="wiki.cgi?page=Tips" class="wikipage">Tips</a></li>
+</ul>
+<h4>更新情報</h4>
+<ul>
+<li><a href="wiki.cgi?page=%B1%E9%BD%AC%B2%DD%C2%EA" class="wikipage">演習課題</a></li>
+<li><a href="wiki.cgi?page=%C2%E811%BD%B5%B1%E9%BD%AC%B2%DD%C2%EA" class="wikipage">第11週演習課題</a></li>
+<li><a href="wiki.cgi?page=%C2%E88%2B9%BD%B5%B1%E9%BD%AC%B2%DD%C2%EA" class="wikipage">第8+9週演習課題</a></li>
+<li><a href="wiki.cgi?page=%A5%EC%A5%DD%A1%BC%A5%C8%B2%DD%C2%EA" class="wikipage">レポート課題</a></li>
+<li><a href="wiki.cgi?page=%C2%E81%B2%F3%A5%EC%A5%DD%A1%BC%A5%C8%C3%D9%B1%E4%C4%F3%BD%D0" class="wikipage">第1回レポート遅延提出</a></li>
+</ul>
+
+    </div>
+  
+</body></html>

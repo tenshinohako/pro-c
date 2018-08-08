@@ -1,0 +1,95 @@
+     1	﻿#!/usr/local/bin/perl
+     2	#
+     3	# Very Simple Editor
+     4	#
+     5	
+     6	use Tk;
+     7	
+     8	$mw = MainWindow->new();
+     9	$mw->title("Very Simple Editor");
+    10	
+    11	#
+    12	# ボタンとファイル名エントリを格納するフレームを作成
+    13	#
+    14	$top = $mw->Frame(-borderwidth => 10);
+    15	$top->pack(-side => 'top', -fill => 'x');
+    16	
+    17	#
+    18	# ボタンとファイル名エントリを作成, 配置
+    19	#
+    20	$quit = $top->Button(-text => 'Quit', -command => sub { exit });
+    21	$clear = $top->Button(-text => 'Clear', -command => \&clear_text);
+    22	$save = $top->Button(-text => 'Save', -command => \&save_text);
+    23	$load = $top->Button(-text => 'Load', -command => \&load_text);
+    24	$insert = $top->Button(-text => 'Insert', -command => \&insert_text);
+    25	$label = $top->Label(-text => 'Filename:', -padx => 0);
+    26	$filename = $top->Entry(-width => 20,
+    27				-relief => 'sunken',
+    28				-textvariable => \$savefilename);
+    29	$label->pack(-side => 'left');
+    30	$filename->pack(-side => 'left');
+    31	$quit->pack(-side => 'right');
+    32	$clear->pack(-side => 'right');
+    33	$save->pack(-side => 'right');
+    34	$load->pack(-side => 'right');
+    35	$insert->pack(-side => 'right');
+    36	
+    37	#
+    38	# エディットに利用するテキストウィジェットを作成
+    39	#
+    40	$textframe = $mw->Frame();
+    41	$scroll = $textframe->Scrollbar();
+    42	$textfield = $textframe->Text(-width => 80,
+    43				      -height => 25,
+    44				      -borderwidth => 2,
+    45				      -relief => 'sunken',
+    46				      -setgrid => 1,
+    47				      -yscrollcommand => ['set' => $scroll]);
+    48	$scroll->configure(-command => ['yview' => $textfield]);
+    49	$scroll->pack(-side => 'right', -fill => 'y');
+    50	$textfield->pack(-side => 'left', -fill => 'both', -expand => 1);
+    51	$textframe->pack(-side => 'top', -fill => 'both', -expand => 1);
+    52	
+    53	#
+    54	# 表示
+    55	#
+    56	MainLoop;
+    57	
+    58	#
+    59	# Clearボタンに対応する手続き
+    60	# エディット中のテキストをすべて削除する
+    61	#
+    62	sub clear_text {
+    63	    $textfield->delete('1.0','end');
+    64	}
+    65	
+    66	#
+    67	# Saveボタンに対応する手続き
+    68	# filenameエントリに記述されたファイル名でファイルをオープンし, 
+    69	# テキストウィジェットの内容をそのファイルへ書き込む
+    70	#
+    71	sub save_text {
+    72	    open(OUTFILE, ">$savefilename")
+    73		or warn("Can't open '$savefilename'"), return;
+    74	    print OUTFILE $textfield->get('1.0','end');
+    75	    close(OUTFILE);
+    76	}
+    77	
+    78	sub load_text{
+    79	    open(INFILE, "<$savefilename")
+    80		or warn("Can't open '$savefilename'"), return;
+    81	    $textfield->delete( '1.0', 'end' );
+    82	    while(<INFILE>){
+    83		$textfield->insert( 'end', $_ );
+    84	    }
+    85	    close(INFILE);
+    86	}
+    87	
+    88	sub insert_text{
+    89	    open(INFILE, "<$savefilename")
+    90		or warn("Can't open '$savefilename'"), return;
+    91	    while(<INFILE>){
+    92		$textfield->insert( 'insert', $_ );
+    93	    }
+    94	    close(INFILE);
+    95	}

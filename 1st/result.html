@@ -1,0 +1,243 @@
+<html>
+<head>
+<title>File Contents</title>
+</head>
+<body>
+<h1>File Contents</h1>
+<a href="#.alias">1 .alias</a><br>
+<a href="#.cshrc">2 .cshrc</a><br>
+<a href="#.emacs">3 .emacs</a><br>
+<a href="#.xsession">4 .xsession</a><br>
+<h2><a name=".alias">1 .alias</a></h2>
+<pre>
+#
+#  .alias
+#
+#      Written by Fumihisa Shibata
+#
+#      1999/03/26
+#
+
+alias	rm	'rm -i'
+alias	cp	'cp -i'
+alias	cls	'clear'
+alias	..	'cd ..'
+alias	la	'ls -aF'
+alias	lc	'ls -Fal'
+alias	ll	'ls -lF'
+alias	lg	'ls -Falg'
+alias	.	'ls -Fal'
+alias	dir	'ls -F'
+alias	md	'mkdir'
+alias	rd	'rmdir'
+alias	Resize	'set noglob;eval `resize \!:* `;unset noglob'
+alias	less	'jless'
+#
+#alias	platex	'platex -kanji=euc'
+#alias	dvipdfmx	'dvipdfmx -p a4'
+</pre>
+<h2><a name=".cshrc">2 .cshrc</a></h2>
+<pre>
+#
+#  .cshrc
+#
+#      Written by Fumihisa Shibata
+#
+#      1999/03/26
+#
+#      2002/09/02 Modified by tajima@ics for Wnn7
+#
+
+#
+#  Mail Setting
+#
+if ( -e /var/mail/$USER ) then
+	set	mail = (120 /var/mail/$USER)
+endif
+
+#
+#  File Permission
+#
+umask	022
+
+#
+#  Resource limitation
+#
+limit	coredumpsize	0
+
+# 
+#  Stty Setting
+#
+if ($?prompt) then
+	stty	erase	"^H"
+	stty	kill	"^X"
+	stty	intr	"^C"
+	stty	susp	"^Z"
+endif
+
+#
+#  Environment Variable
+#
+setenv	EXINIT	'set aw sm sw=8 redraw ai'	# vi
+setenv	JLESSCHARSET	japanese-jis		# less
+setenv	JSERVER		expwnn			# Wnn7 server
+setenv	PAGER		jless			# Pager
+setenv	LC_CTYPE	ja_JP.eucJP		# jman
+
+setenv	LOCALTOOL	/usr/local		# Local
+#setenv	X11R6HOME	/usr/X11R6		# X11R6
+
+# Adobe Acrobat Reader
+setenv ADOBE_LANG	JPN
+setenv ADOBE_VER	8
+
+# ORACLE 10g
+#setenv ORACLE_HOME	/compat/linux/usr/lib/oracle
+#setenv NLS_LANG		Japanese_Japan.JA16EUC
+
+# ModelSim and ASIPmeister
+setenv LM_LICENSE_FILE	1717@lms.exp.ics.es.osaka-u.ac.jp
+# Precision
+setenv PRECISION_OS_BIN_DIRS "/compat/linux/bin /bin /usr/bin /usr/ucb"
+
+#  MANPATH Setting
+setenv	MANPATH		/usr/share/man
+setenv	MANPATH		$LOCALTOOL/man:$LOCALTOOL/share/man:$MANPATH
+#setenv	MANPATH		$X11R6HOME/man:$MANPATH
+
+#
+#  Shell Variable
+#
+set	filec
+set	history = 512
+
+#  Path Setting
+set	path = ( ~/bin )
+set	path = ( $path $LOCALTOOL/bin )
+set	path = ( $path $LOCALTOOL/sbin )
+set	path = ( $path $LOCALTOOL/kde4/bin )
+set	path = ( $path $LOCALTOOL/kde4/sbin )
+#set	path = ( $path $X11R6HOME/bin )
+set	path = ( $path /usr/bin )
+set	path = ( $path /bin )
+set	path = ( $path /usr/sbin )
+set	path = ( $path /sbin )
+# ORACLE 10g
+#set	path = ( $path $ORACLE_HOME/bin )
+# ModelSim, Precision and ASIPmeister
+set	path = ( /usr/local/cad/mentor/modeltech/linux $path )
+#set	path = ( /usr/local/cad/mentor/Mgc_home/bin $path )
+set	path = ( /usr/local/cad/ASIPmeister/bin $path )
+#set	path = ( /usr/local/linux-sun-jre1.6.0/bin $path )
+# BMI
+set	path = ( $path /home/exp/bmi/util/bin )
+
+#  Prompt Setting
+set ostype=`uname -s`
+if ( $ostype == "FreeBSD"  ) then
+	set	prompt = `hostname -s`'[\!]% '
+#	setenv	DISPLAY	`hostname -s`:0
+endif
+
+#
+source	~/.alias
+
+</pre>
+<h2><a name=".emacs">3 .emacs</a></h2>
+<pre>
+(if (featurep 'xemacs)
+    (load "~/.xemacs/init.el" nil t nil)	 ;; After XEmacs-20.3
+  (if (boundp 'MULE)
+    ;; Mule Environment
+    (load "~/.mule.el")
+;    (cond
+;     ((string= "19.28.1" emacs-version)
+;      (load "~/.mule-19.28")		 ;; Mule-2.3 with Emacs-19.28 base
+;      )
+;     ((string= "19.34.1" emacs-version)
+;      (load "~/.mule-19.34")		 ;; Mule-2.3 with Emacs-19.34 base
+;      )
+;     )
+))
+
+;; Other Emacs Environment
+(cond
+ ((>= emacs-major-version 24)
+  (load "~/.emacs24.el")		 ;; Emacs-24
+  )
+ ((>= emacs-major-version 23)
+  (load "~/.emacs23.el")		 ;; Emacs-23
+  )
+ ((>= emacs-major-version 21)
+  (load "~/.emacs22.el")		 ;; Emacs-22
+  )
+ ((= emacs-major-version 20)
+  (load "~/.emacs21.el")		 ;; Emacs-21
+  )
+ )
+</pre>
+<h2><a name=".xsession">4 .xsession</a></h2>
+<pre>
+#!/bin/sh
+#
+#  .xsession
+#
+#      Written by Fumihisa Shibata
+#
+#      1999/03/31
+#
+#	Modified by tajima@ics 2002/09/02 for Wnn7
+#
+
+#if [ -f $HOME/.Xresources ]; then
+#	xrdb -load $HOME/.Xresources
+#fi
+
+#if [ -f $HOME/.xmodmap ]; then
+#	xmodmap $HOME/.xmodmap
+#fi
+
+#
+#eval `dbus-launch --sh-syntax`
+
+# for Wnn7
+JSERVER=expwnn
+export JSERVER
+
+xset b 1
+#xset bc
+#xset fp+ /usr/X11R6/lib/X11/fonts/Type1
+
+# mozc for Ibus
+export XIM=ibus
+export GTK_IM_MODULE=ibus
+export QT_IM_MODULE=xim
+export XMODIFIERS='@im=ibus'
+#export XIM_PROGRAM="ibus-daemon"
+#export XIM_ARGS="-r --daemonize --xim"
+mozc start
+ibus-daemon -r --daemonize --xim
+sleep 1
+
+# SCIM
+#export GTK_IM_MODULE=scim
+#export XMODIFIERS=@im=SCIM
+#scim -d
+
+# fvwm2
+#env LANG=C twm &
+#env LANG=ja_JP.eucJP twm &
+#env LANG=ja_JP.eucJP ctwm &
+#env LANG=ja_JP.UTF-8 twm &
+#env LANG=ja_JP.UTF-8 ctwm &
+env LANG=ja_JP.eucJP fvwm2 &
+exec xterm -ls -T login -n login -geometry +0+0
+
+# Mate
+#exec env LANG=ja_JP.eucJP mate-session
+
+# KDE
+#exec env LANG=ja_JP.eucJP /usr/local/kde4/bin/startkde
+</pre>
+</body>
+</html>

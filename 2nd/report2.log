@@ -1,0 +1,545 @@
+This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (utf8.sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  8 AUG 2016 01:12
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**./report2.tex
+(./report2.tex
+pLaTeX2e <2006/11/10> (based on LaTeX2e <2015/01/01> patch level 0)
+Babel <3.9l> and hyphenation patterns for 79 languages loaded.
+(./procreport.cls
+Document Class: procreport 
+(c:/w32tex/share/texmf-dist/tex/platex/base/jarticle.cls
+Document Class: jarticle 2006/06/27 v1.6 Standard pLaTeX class
+\c@@paper=\count81
+(c:/w32tex/share/texmf-dist/tex/latex/base/fleqn.clo
+File: fleqn.clo 2015/03/31 v1.1i Standard LaTeX option (flush left equations)
+\mathindent=\dimen118
+Applying: [2015/01/01] Make \[ robust on input line 50.
+LaTeX Info: Redefining \[ on input line 51.
+Already applied: [0000/00/00] Make \[ robust on input line 62.
+Applying: [2015/01/01] Make \] robust on input line 74.
+LaTeX Info: Redefining \] on input line 75.
+Already applied: [0000/00/00] Make \] robust on input line 83.
+)
+(c:/w32tex/share/texmf-dist/tex/platex/base/jsize10.clo
+File: jsize10.clo 2006/06/27 v1.6 Standard pLaTeX file (size option)
+)
+\c@part=\count82
+\c@section=\count83
+\c@subsection=\count84
+\c@subsubsection=\count85
+\c@paragraph=\count86
+\c@subparagraph=\count87
+\c@figure=\count88
+\c@table=\count89
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\symmincho=\mathgroup4
+LaTeX Font Info:    Overwriting symbol font `mincho' in version `bold'
+(Font)                  JY1/mc/m/n --> JY1/gt/m/n on input line 601.
+\toclineskip=\dimen119
+\@lnumwidth=\dimen120
+\bibindent=\dimen121
+\heisei=\count90
+)
+(c:/w32tex/share/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2010/09/12 v5.6 Page Geometry
+
+(c:/w32tex/share/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks15
+)
+(c:/w32tex/share/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is not detected.
+)
+(c:/w32tex/share/texmf-dist/tex/generic/oberdiek/ifvtex.sty
+Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
+Package ifvtex Info: VTeX not detected.
+)
+(c:/w32tex/share/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+\Gm@cnth=\count91
+\Gm@cntv=\count92
+\c@Gm@tempcnt=\count93
+\Gm@bindingoffset=\dimen122
+\Gm@wd@mp=\dimen123
+\Gm@odd@mp=\dimen124
+\Gm@even@mp=\dimen125
+\Gm@layoutwidth=\dimen126
+\Gm@layoutheight=\dimen127
+\Gm@layouthoffset=\dimen128
+\Gm@layoutvoffset=\dimen129
+\Gm@dimlist=\toks16
+
+(c:/w32tex/share/texmf-dist/tex/latex/geometry/geometry.cfg))
+(c:/w32tex/share/texmf-dist/tex/latex/psnfss/times.sty
+Package: times 2005/04/12 PSNFSS-v9.2a (SPQR) 
+))
+(c:/w32tex/share/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+(c:/w32tex/share/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2014/10/28 v1.0p Standard LaTeX Graphics (DPC,SPQR)
+
+(c:/w32tex/share/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(c:/w32tex/share/texmf-dist/tex/latex/config/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: dvipdfm.def on input line 94.
+
+(c:/w32tex/share/texmf-dist/tex/latex/dvipdfm-def/dvipdfm.def
+File: dvipdfm.def 1999/9/6 vx.x Driver-dependant file
+))
+\Gin@req@height=\dimen130
+\Gin@req@width=\dimen131
+)
+(c:/w32tex/share/texmf-dist/tex/platex/base/ascmac.sty
+(c:/w32tex/share/texmf-dist/tex/platex/base/tascmac.sty
+\@savetbaselineshift=\dimen132
+\@saveybaselineshift=\dimen133
+\scb@x=\box41
+\scscb@x=\box42
+\@bw=\dimen134
+\@nbox=\box43
+\@nbody=\box44
+\@scw=\dimen135
+\@itemh=\dimen136
+\@iboxpos=\toks17
+\@iboxstr=\box45
+\@bwsp=\box46
+\@@bwsp=\box47
+\@bcal=\count94
+\shaderule=\dimen137
+))
+(c:/w32tex/share/texmf-dist/tex/latex/moreverb/moreverb.sty
+Package: moreverb 2008/06/03 v2.3a `more' verbatim facilities
+
+(c:/w32tex/share/texmf-dist/tex/latex/tools/verbatim.sty
+Package: verbatim 2014/10/28 v1.5q LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks18
+\verbatim@line=\toks19
+\verbatim@in@stream=\read1
+)
+\tab@position=\count95
+\tab@size=\count96
+\listing@line=\count97
+) (./report2.aux)
+\openout1 = `report2.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+
+(I search kanjifont definition file: . . ) (I search font definition file: . .
+. . . . . )
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 16.
+ (c:/w32tex/share/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
+*geometry* detected driver: dvipdfm
+*geometry* verbose mode - [ preamble ] result:
+* driver: dvipdfm
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* hratio: 1:1
+* vratio: 1:1
+* modes: 
+* h-part:(L,W,R)=(71.1319pt, 455.24408pt, 71.1319pt)
+* v-part:(T,H,B)=(81.09035pt, 682.86613pt, 81.09036pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=455.24408pt
+* \textheight=682.86613pt
+* \oddsidemargin=-1.13809pt
+* \evensidemargin=-1.13809pt
+* \topmargin=-28.17964pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=7.77588pt
+* \footskip=30.0pt
+* \marginparwidth=106.0pt
+* \marginparsep=10.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+[1
+
+]
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <14.4> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 19.
+LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <14.4> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 19.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 19.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 23.
+ (c:/w32tex/share/texmf-dist/tex/latex/psnfss/omsptm.fd
+File: omsptm.fd 
+)
+LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 23.
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <10> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 25.
+LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <10> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 25.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 25.
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <12> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 68.
+LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <12> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 68.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 68.
+ [1] [2]
+(I search kanjifont definition file: . . ) (I search font definition file: . .
+. . . . . )
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 128.
+
+ (c:/w32tex/share/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+)
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 149.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 149.
+ [3]
+[4] [5] [6] [7]
+Overfull \vbox (89.9727pt too high) has occurred while \output is active []
+
+
+[8] [9] [10] [11] [12] [13] [14] [15] [16] [17]
+Overfull \hbox (60.75592pt too wide) in paragraph at lines 584--584
+[]    \OT1/pcr/m/n/10 55  /*---------------------------------------------------
+-------------------------[] 
+ []
+
+
+Overfull \hbox (60.75592pt too wide) in paragraph at lines 596--596
+[]    \OT1/pcr/m/n/10 67   *---------------------------------------------------
+-----------------------*/[] 
+ []
+
+[18]
+Overfull \hbox (36.75592pt too wide) in paragraph at lines 640--640
+[]   \OT1/pcr/m/n/10 107                          if(fgets(command_buffer, BUFL
+EN, stdin) == NULL) {[] 
+ []
+
+
+Overfull \hbox (6.75592pt too wide) in paragraph at lines 649--649
+[]   \OT1/pcr/m/n/10 116                          if(command_buffer[strlen(comm
+and_buffer) - 1][] 
+ []
+
+
+Overfull \hbox (36.75592pt too wide) in paragraph at lines 651--651
+[]   \OT1/pcr/m/n/10 117                                  command_buffer[strlen
+(command_buffer) - 1][] 
+ []
+
+
+Overfull \hbox (60.75592pt too wide) in paragraph at lines 658--658
+[]   \OT1/pcr/m/n/10 123                  while(*command_buffer_p == ' ' || *co
+mmand_buffer_p == '\t') {[] 
+ []
+
+[19]
+Overfull \hbox (36.75592pt too wide) in paragraph at lines 667--667
+[]   \OT1/pcr/m/n/10 131                                          history_num[i
+] = history_num[i+1];[] 
+ []
+
+
+Overfull \hbox (36.75592pt too wide) in paragraph at lines 669--669
+[]   \OT1/pcr/m/n/10 133                          strcpy(&history[MAXHISTORY-1]
+[0], command_buffer);[] 
+ []
+
+
+Overfull \hbox (36.75592pt too wide) in paragraph at lines 689--689
+[]   \OT1/pcr/m/n/10 153                          access = head;               
+                   //
+ []
+
+
+Overfull \hbox (7.50024pt too wide) in paragraph at lines 695--695
+[]   \OT1/pcr/m/n/10 159                          delete_binary(a_head);       
+           //\JY1/mc/m/n/10 構造
+ []
+
+
+Overfull \hbox (30.75592pt too wide) in paragraph at lines 709--709
+[]   \OT1/pcr/m/n/10 173                                          printf("%2d %
+s\n",history_num[i],[] 
+ []
+
+[20]
+Overfull \hbox (30.75592pt too wide) in paragraph at lines 715--715
+[]   \OT1/pcr/m/n/10 178                                  printf("%s\n",&histor
+y[MAXHISTORY-2][0]);[] 
+ []
+
+
+Overfull \hbox (6.75592pt too wide) in paragraph at lines 722--722
+[]   \OT1/pcr/m/n/10 184                                  for(i = 0; *(args[0]+
+i) != '\0'; i++)[] 
+ []
+
+
+Overfull \hbox (138.75592pt too wide) in paragraph at lines 744--744
+[]   \OT1/pcr/m/n/10 200                                                  print
+f("%s: event not found\n", args[0]-1);[] 
+ []
+
+
+Overfull \hbox (0.75592pt too wide) in paragraph at lines 748--748
+[]   \OT1/pcr/m/n/10 203                                                  if(!s
+trncmp(args[0],[] 
+ []
+
+
+Overfull \hbox (12.75592pt too wide) in paragraph at lines 750--750
+[]   \OT1/pcr/m/n/10 204                                                       
+   printf("%s\n",[] 
+ []
+
+[21]
+Overfull \hbox (30.75592pt too wide) in paragraph at lines 765--765
+[]   \OT1/pcr/m/n/10 216                                  printf("%s: No such f
+ile or directory\n",[] 
+ []
+
+
+Overfull \hbox (0.75592pt too wide) in paragraph at lines 775--775
+[]   \OT1/pcr/m/n/10 225                          p = (DIRS_STACK*)malloc(sizeo
+f(DIRS_STACK));[] 
+ []
+
+
+Overfull \hbox (6.75592pt too wide) in paragraph at lines 787--787
+[]   \OT1/pcr/m/n/10 236                                          getcwd(p->dir
+sname, PATHLEN);[] 
+ []
+
+
+Overfull \hbox (24.75592pt too wide) in paragraph at lines 800--800
+[]   \OT1/pcr/m/n/10 249                                          printf("%s\n"
+,access->dirsname);[] 
+ []
+
+[22]
+Overfull \hbox (36.75592pt too wide) in paragraph at lines 830--830
+[]   \OT1/pcr/m/n/10 279                                          if(strcmp(a_a
+ccess->alias_command,[] 
+ []
+
+
+Overfull \hbox (36.75592pt too wide) in paragraph at lines 832--832
+[]   \OT1/pcr/m/n/10 280                                                  a_acc
+ess = a_access->left;[] 
+ []
+
+
+Overfull \hbox (66.75592pt too wide) in paragraph at lines 833--833
+[]   \OT1/pcr/m/n/10 281                                          else if(strcm
+p(a_access->alias_command,[] 
+ []
+
+
+Overfull \hbox (42.75592pt too wide) in paragraph at lines 835--835
+[]   \OT1/pcr/m/n/10 282                                                  a_acc
+ess = a_access->right;[] 
+ []
+
+
+Overfull \hbox (18.75592pt too wide) in paragraph at lines 840--840
+[]   \OT1/pcr/m/n/10 286                                                  while
+(args[i] != NULL){[] 
+ []
+
+[23]
+Overfull \hbox (48.75592pt too wide) in paragraph at lines 853--853
+[]   \OT1/pcr/m/n/10 296                                          strcpy(a_p->a
+lias_command, args[1]);[] 
+ []
+
+
+Overfull \hbox (66.75592pt too wide) in paragraph at lines 854--854
+[]   \OT1/pcr/m/n/10 297                                          strcpy(a_p->o
+riginal_command, args[2]);[] 
+ []
+
+
+Overfull \hbox (42.75592pt too wide) in paragraph at lines 870--870
+[]   \OT1/pcr/m/n/10 310                                                       
+   a_temp->left = a_p;[] 
+ []
+
+
+Overfull \hbox (48.75592pt too wide) in paragraph at lines 873--873
+[]   \OT1/pcr/m/n/10 312                                                       
+   a_temp->right = a_p;[] 
+ []
+
+
+Overfull \hbox (42.75592pt too wide) in paragraph at lines 880--880
+[]   \OT1/pcr/m/n/10 319                          if(execute_alias(a_head, args
+[0], command_buffer)){[] 
+ []
+
+
+Overfull \hbox (12.75592pt too wide) in paragraph at lines 884--884
+[]   \OT1/pcr/m/n/10 323                                  execute_command(args,
+ command_status);[] 
+ []
+
+
+Overfull \hbox (30.75592pt too wide) in paragraph at lines 891--891
+[]   \OT1/pcr/m/n/10 330  int execute_alias(ALIAS_BINARY *now, char *command, c
+har *command_buffer)[] 
+ []
+
+[24]
+Overfull \hbox (6.75592pt too wide) in paragraph at lines 899--899
+[]   \OT1/pcr/m/n/10 338                  }else if(strcmp(access->alias_command
+, command) < 0){[] 
+ []
+
+
+Overfull \hbox (30.75592pt too wide) in paragraph at lines 902--902
+[]   \OT1/pcr/m/n/10 341                          strcpy(command_buffer, access
+->original_command);[] 
+ []
+
+
+Overfull \hbox (6.75592pt too wide) in paragraph at lines 920--920
+[]   \OT1/pcr/m/n/10 359                  else if(strcmp(access1->alias_command
+, command) < 0){[] 
+ []
+
+
+Overfull \hbox (6.75592pt too wide) in paragraph at lines 935--935
+[]   \OT1/pcr/m/n/10 374                          if(strcmp(temp1->alias_comman
+d, command) > 0)[] 
+ []
+
+
+Overfull \hbox (42.75592pt too wide) in paragraph at lines 937--937
+[]   \OT1/pcr/m/n/10 376                          else if (strcmp(temp1->alias_
+command, command) < 0)[] 
+ []
+
+[25]
+Overfull \hbox (6.75592pt too wide) in paragraph at lines 954--954
+[]   \OT1/pcr/m/n/10 393                          if(strcmp(temp1->alias_comman
+d, command) > 0)[] 
+ []
+
+
+Overfull \hbox (42.75592pt too wide) in paragraph at lines 956--956
+[]   \OT1/pcr/m/n/10 395                          else if (strcmp(temp1->alias_
+command, command) < 0)[] 
+ []
+
+
+Overfull \hbox (0.75592pt too wide) in paragraph at lines 967--967
+[]   \OT1/pcr/m/n/10 406          printf("%s: %s\n",now->alias_command,now->ori
+ginal_command);[] 
+ []
+
+
+Overfull \hbox (60.75592pt too wide) in paragraph at lines 981--981
+[]   \OT1/pcr/m/n/10 420  /*---------------------------------------------------
+-------------------------[] 
+ []
+
+[26]
+Overfull \hbox (60.75592pt too wide) in paragraph at lines 997--997
+[]   \OT1/pcr/m/n/10 436   *---------------------------------------------------
+-----------------------*/[] 
+ []
+
+
+Overfull \hbox (8.47754pt too wide) in paragraph at lines 1000--1000
+[]   \OT1/pcr/m/n/10 439                    char *args[])                 /* \J
+Y1/mc/m/n/10 引数へのポインタ配列 \OT1/pcr/m/n/10 */[] 
+ []
+
+[27] [28]
+Overfull \hbox (0.75592pt too wide) in paragraph at lines 1087--1087
+[]   \OT1/pcr/m/n/10 525          if(arg_index > 0 && strcmp(args[arg_index - 1
+], "&") == 0) {[] 
+ []
+
+
+Overfull \hbox (0.75592pt too wide) in paragraph at lines 1106--1106
+[]   \OT1/pcr/m/n/10 544                  while(args[i] != NULL && strcmp(args[
+i], "*") != 0){[] 
+ []
+
+
+Overfull \hbox (6.75592pt too wide) in paragraph at lines 1119--1119
+[]   \OT1/pcr/m/n/10 557                                  strcpy(&wild_card[j][
+0], dp->d_name);[] 
+ []
+
+[29]
+Overfull \hbox (60.75592pt too wide) in paragraph at lines 1142--1142
+[]   \OT1/pcr/m/n/10 580  /*---------------------------------------------------
+-------------------------[] 
+ []
+
+
+Overfull \hbox (60.75592pt too wide) in paragraph at lines 1158--1158
+[]   \OT1/pcr/m/n/10 596   *---------------------------------------------------
+-----------------------*/[] 
+ []
+
+
+Overfull \hbox (10.37808pt too wide) in paragraph at lines 1161--1161
+[]   \OT1/pcr/m/n/10 599                                           int command_
+status)     /* \JY1/mc/m/n/10 コ
+ []
+
+[30] [31]
+Overfull \hbox (60.75592pt too wide) in paragraph at lines 1219--1219
+[]   \OT1/pcr/m/n/10 657  /*-- END OF FILE ------------------------------------
+-----------------------*/[] 
+ []
+
+[32] (./report2.aux) ) 
+Here is how much of TeX's memory you used:
+ 1329 strings out of 493777
+ 17815 string characters out of 6153182
+ 98008 words of memory out of 5000000
+ 4814 multiletter control sequences out of 15000+600000
+ 12797 words of font info for 46 fonts, out of 8000000 for 9000
+ 929 hyphenation exceptions out of 8191
+ 31i,5n,33p,632b,334s stack positions out of 5000i,500n,10000p,500000b,80000s
+
+Output written on report2.dvi (33 pages, 60356 bytes).

@@ -1,0 +1,12 @@
+ls
+
+pushd ..
+
+ls
+
+dirs
+
+popd
+
+pwd
+

@@ -1,0 +1,657 @@
+     1	/*
+     2	 *  インクルードファイル
+     3	 */
+     4	
+     5	#include <stdio.h>
+     6	#include <stdlib.h>
+     7	#include <sys/types.h>
+     8	#include <unistd.h>
+     9	#include <sys/wait.h>
+    10	#include <string.h>
+    11	#include <dirent.h>
+    12	
+    13	/*
+    14	 *  定数の定義
+    15	 */
+    16	
+    17	#define BUFLEN	1024	 /* コマンド用のバッファの大きさ */
+    18	#define MAXARGNUM  256	 /* 最大の引数の数 */
+    19	
+    20	#define MAXHISTORY 32
+    21	#define PATHLEN 256
+    22	#define PROMPTLEN 32
+    23	#define COMMANDLEN 16
+    24	#define DIRLEN 64
+    25	#define WILDCARDNUM 64
+    26	
+    27	/*
+    28	 *	構造体の宣言
+    29	 */
+    30	
+    31	typedef struct dirs_stack{
+    32		char dirsname[PATHLEN];
+    33		struct dirs_stack *next;
+    34	} DIRS_STACK;
+    35		
+    36	typedef struct alias_binary{
+    37		char alias_command[COMMANDLEN];
+    38		char original_command[BUFLEN];
+    39		struct alias_binary *left;
+    40		struct alias_binary *right;
+    41	} ALIAS_BINARY;
+    42	
+    43	/*
+    44	 *  ローカルプロトタイプ宣言
+    45	 */
+    46	
+    47	int parse(char [], char *[]);
+    48	void execute_command(char *[], int);
+    49	
+    50	int execute_alias(ALIAS_BINARY *, char *, char *);
+    51	void delete_alias(ALIAS_BINARY **, char *);
+    52	void show_alias(ALIAS_BINARY *);
+    53	void delete_binary(ALIAS_BINARY *);
+    54	
+    55	/*----------------------------------------------------------------------------
+    56	 *
+    57	 *  関数名   : main
+    58	 *
+    59	 *  作業内容 : シェルのプロンプトを実現する
+    60	 *
+    61	 *  引数	 :
+    62	 *
+    63	 *  返り値   :
+    64	 *
+    65	 *  注意	 :
+    66	 *
+    67	 *--------------------------------------------------------------------------*/
+    68	
+    69	int main(int argc, char *argv[])
+    70	{
+    71		char command_buffer[BUFLEN]; /* コマンド用のバッファ */
+    72		char *args[MAXARGNUM];	   /* 引数へのポインタの配列 */
+    73		int command_status;		  /* コマンドの状態を表す
+    74										command_status = 0 : フォアグラウンドで実行
+    75										command_status = 1 : バックグラウンドで実行
+    76										command_status = 2 : シェルの終了
+    77										command_status = 3 : 何もしない */
+    78		char history[MAXHISTORY][BUFLEN];
+    79		int history_num[MAXHISTORY] = {};
+    80		int num = 0;
+    81		int prev =0;
+    82		char pathname[PATHLEN];
+    83		char *command_buffer_p;
+    84		char prompt[PROMPTLEN] = "prompt";
+    85		int i;
+    86		int history_x;
+    87		
+    88		DIRS_STACK *head = NULL, *p, *access;
+    89		ALIAS_BINARY *a_head = NULL, *a_p, *a_access, *a_temp;
+    90		/*
+    91		 *  無限にループする
+    92		 */
+    93	
+    94		for(;;) {
+    95			/*
+    96			 *  プロンプトを表示する
+    97			 */
+    98	
+    99			if(prev == 0){
+   100				if(isatty(fileno(stdin)))
+   101					printf("\n%s : ", prompt);
+   102	
+   103			/*
+   104			 *  標準入力から１行を command_buffer へ読み込む
+   105			 *  入力が何もなければ改行を出力してプロンプト表示へ戻る
+   106			 */
+   107				if(fgets(command_buffer, BUFLEN, stdin) == NULL) {
+   108	
+   109				  if(isatty(fileno(stdin))){
+   110				    printf("\n");
+   111					continue;
+   112				  }else{
+   113				    exit(EXIT_SUCCESS);
+   114				  }
+   115				}
+   116				if(command_buffer[strlen(command_buffer) - 1] == '\n'){
+   117					command_buffer[strlen(command_buffer) - 1] = '\0';
+   118				}
+   119			}
+   120			
+   121			command_buffer_p = &command_buffer[0];
+   122			
+   123			while(*command_buffer_p == ' ' || *command_buffer_p == '\t') {
+   124				command_buffer_p++;
+   125			}
+   126		
+   127			if(strcmp(command_buffer_p, "") != 0){
+   128				if(prev == 0)
+   129					for(i = 0; i<MAXHISTORY-1; i++){
+   130						strcpy(&history[i][0], &history[i+1][0]);
+   131						history_num[i] = history_num[i+1];
+   132					}
+   133				strcpy(&history[MAXHISTORY-1][0], command_buffer);
+   134				history_num[MAXHISTORY-1] = ++num;
+   135			}
+   136			
+   137			prev = 0;
+   138	
+   139			/*
+   140			 *  入力されたバッファ内のコマンドを解析する
+   141			 *
+   142			 *  返り値はコマンドの状態
+   143			 */
+   144	
+   145			command_status = parse(command_buffer, args);
+   146	
+   147			/*
+   148			 *  終了コマンドならばプログラムを終了
+   149			 *  引数が何もなければプロンプト表示へ戻る
+   150			 */
+   151	
+   152			if(command_status == 2) {
+   153				access = head;					//スタック容量を開放
+   154				while(access != NULL){
+   155					access = access->next;
+   156					free(head);
+   157					head = access;
+   158				}
+   159				delete_binary(a_head);			//構造体二分木容量開放
+   160				printf("done.\n");
+   161				exit(EXIT_SUCCESS);
+   162			} else if(command_status == 3) {
+   163				continue;
+   164			}
+   165	
+   166			/*
+   167			 *  コマンドを実行する
+   168			 */
+   169	
+   170			if(!strcmp(args[0], "history")){
+   171				for(i = 0; i<MAXHISTORY; i++)
+   172					if(history_num[i] != 0)
+   173						printf("%2d %s\n",history_num[i], &history[i][0]);
+   174					
+   175			}else if(!strncmp(args[0], "!", 1)){
+   176				++args[0];
+   177				if(!strcmp(args[0], "!")){
+   178					printf("%s\n",&history[MAXHISTORY-2][0]);
+   179					stpcpy(&command_buffer[0], &history[MAXHISTORY-2][0]);
+   180					--num;
+   181					prev = 1;
+   182				}else{
+   183					history_x = 0;
+   184					for(i = 0; *(args[0]+i) != '\0'; i++)
+   185						if(47 < *(args[0]+i) && *(args[0]+i) < 58){
+   186							history_x *= 10;
+   187							history_x += (int)*(args[0]+i) - 48;
+   188						}
+   189						else
+   190							break;
+   191					if(*(args[0]+i) == '\0'){
+   192						for(i = 0; i<MAXHISTORY && prev == 0; i++)
+   193							if(history_x == history_num[MAXHISTORY-1-i]){
+   194								printf("%s\n",&history[MAXHISTORY-1-i][0]);
+   195								strcpy(command_buffer, &history[MAXHISTORY-1-i][0]);
+   196								--num;
+   197								prev = 1;
+   198							}
+   199						if(prev == 0)
+   200							printf("%s: event not found\n", args[0]-1);
+   201					}else{
+   202						for(i = 0; i<MAXHISTORY && prev == 0; i++)
+   203							if(!strncmp(args[0], &history[MAXHISTORY-1-i][0], strlen(args[0]))){
+   204								printf("%s\n",&history[MAXHISTORY-1-i][0]);
+   205								strcpy(command_buffer, &history[MAXHISTORY-1-i][0]);
+   206								--num;
+   207								prev = 1;
+   208							}
+   209						if(prev == 0)
+   210							printf("%s: event not found\n", args[0]-1);
+   211					}
+   212				}
+   213				
+   214			}else if(!strcmp(args[0], "cd")){
+   215				if(chdir(args[1]))
+   216					printf("%s: No such file or directory\n", args[1]);
+   217				getcwd(pathname, PATHLEN);
+   218				printf("%s\n", pathname);
+   219				
+   220			}else if(!strcmp(args[0], "pwd")){
+   221				getcwd(pathname, PATHLEN);
+   222				printf("%s\n", pathname);
+   223				
+   224			}else if(!strcmp(args[0], "pushd")){
+   225				p = (DIRS_STACK*)malloc(sizeof(DIRS_STACK));
+   226				if(args[1] == NULL){
+   227					getcwd(p->dirsname, PATHLEN);
+   228					printf("%s\n",p->dirsname);
+   229					p->next = head;
+   230					head = p;
+   231				}else{
+   232					if(chdir(args[1])){
+   233						printf("%s: No such file or directory\n", args[1]);
+   234						free(p);
+   235					}else{
+   236						getcwd(p->dirsname, PATHLEN);
+   237						printf("%s\n",p->dirsname);
+   238						p->next = head;
+   239						head = p;
+   240					}
+   241				}
+   242				
+   243			}else if(!strcmp(args[0], "dirs")){
+   244				if(head == NULL)
+   245					printf("(null)\n");
+   246				else{
+   247					access = head;
+   248					while(access != NULL){
+   249						printf("%s\n",access->dirsname);
+   250						access = access->next;
+   251					}
+   252				}
+   253	
+   254			}else if(!strcmp(args[0], "popd")){
+   255				if(head == NULL)
+   256					printf("(null)\n");
+   257				else{
+   258					chdir(head->dirsname);
+   259					printf("%s\n",head->dirsname);
+   260					p = head;
+   261					head = p->next;
+   262					free(p);
+   263				}
+   264	
+   265			}else if(!strcmp(args[0], "prompt")){
+   266				if(args[1] == NULL)
+   267					strcpy(prompt, "prompt");
+   268				else
+   269					stpcpy(prompt, args[1]);
+   270				
+   271			}else if(!strcmp(args[0], "alias")){
+   272				if(args[1] == NULL){
+   273					show_alias(a_head);
+   274				}
+   275				else{
+   276					a_access = a_head;
+   277					while(a_access != NULL){
+   278						a_temp = a_access;
+   279						if(strcmp(a_access->alias_command, args[1]) > 0)
+   280							a_access = a_access->left;
+   281						else if(strcmp(a_access->alias_command, args[1]) < 0)
+   282							a_access = a_access->right;
+   283						else{
+   284							strcpy(a_access->original_command, args[2]);
+   285							i = 3;
+   286							while(args[i] != NULL){
+   287								strcat(a_access->original_command, " ");
+   288								strcat(a_access->original_command, args[i]);
+   289								++i;
+   290							}
+   291							break;
+   292						}
+   293					}
+   294					if(a_access == NULL){
+   295						a_p = (ALIAS_BINARY *)malloc(sizeof(ALIAS_BINARY));
+   296						strcpy(a_p->alias_command, args[1]);
+   297						strcpy(a_p->original_command, args[2]);
+   298						i = 3;
+   299						while(args[i] != NULL){
+   300							strcat(a_access->original_command, " ");
+   301							strcat(a_access->original_command, args[i]);
+   302							++i;
+   303						}
+   304						a_p->left = NULL;
+   305						a_p->right = NULL;
+   306						if(a_head == NULL)
+   307							a_head = a_p;
+   308						else{
+   309							if(strcmp(a_temp->alias_command, args[1]) > 0)
+   310								a_temp->left = a_p;
+   311							else if(strcmp(a_temp->alias_command, args[1]) < 0)
+   312								a_temp->right = a_p;
+   313						}
+   314					}
+   315				}
+   316			}else if(!strcmp(args[0], "unalias")){
+   317				delete_alias(&a_head, args[1]);
+   318			}else{
+   319				if(execute_alias(a_head, args[0], command_buffer)){
+   320					--num;
+   321					prev = 1;
+   322				}else
+   323					execute_command(args, command_status);
+   324			}
+   325		}
+   326	
+   327		return 0;
+   328	}
+   329	
+   330	int execute_alias(ALIAS_BINARY *now, char *command, char *command_buffer)
+   331	{
+   332		ALIAS_BINARY *access;
+   333		
+   334		access = now;
+   335		while(access != NULL){
+   336			if(strcmp(access->alias_command, command) > 0){
+   337				access = access->left;
+   338			}else if(strcmp(access->alias_command, command) < 0){
+   339				access = access->right;
+   340			}else{
+   341				strcpy(command_buffer, access->original_command);
+   342				return(1);
+   343			}
+   344		}
+   345			return(0);
+   346	}
+   347	
+   348	void delete_alias(ALIAS_BINARY **head, char *command)
+   349	{
+   350		ALIAS_BINARY *access1, *access2, *temp1, *temp2 = NULL;
+   351		
+   352		access1 = *head;
+   353		
+   354		while(access1 != NULL){
+   355			if(strcmp(access1->alias_command, command) > 0){
+   356				temp1 = access1;
+   357				access1 = access1->left;
+   358			}
+   359			else if(strcmp(access1->alias_command, command) < 0){
+   360				temp1 = access1;
+   361				access1 = access1->right;
+   362			}
+   363			else
+   364				break;
+   365		}
+   366		
+   367		if(access1 == NULL)
+   368			return;
+   369		
+   370		if(access1->right == NULL){
+   371			if(access1 == *head)
+   372				*head = access1->left;
+   373			else{
+   374				if(strcmp(temp1->alias_command, command) > 0)
+   375					temp1->left = access1->left;
+   376				else if (strcmp(temp1->alias_command, command) < 0)
+   377					temp1->right = access1->left;
+   378			}
+   379			free(access1);
+   380		}else{
+   381			access2 = access1->right;
+   382			while(access2->left != NULL){
+   383				temp2 = access2;
+   384				access2 = access2->left;
+   385			}
+   386			if(temp2 != NULL)
+   387				temp2->left = access2->right;
+   388			access2->left = access1->left;
+   389			access2->right = access1->right;
+   390			if(access1 == *head)
+   391				*head = access2;
+   392			else{
+   393				if(strcmp(temp1->alias_command, command) > 0)
+   394					temp1->left = access2;
+   395				else if (strcmp(temp1->alias_command, command) < 0)
+   396					temp1->right = access2;
+   397			}
+   398			free(access1);
+   399		}
+   400	}
+   401	
+   402	void show_alias(ALIAS_BINARY *now)
+   403	{
+   404		if(now->left != NULL)
+   405			show_alias(now->left);
+   406		printf("%s: %s\n",now->alias_command,now->original_command);
+   407		if(now->right != NULL)
+   408			show_alias(now->right);
+   409	}
+   410	
+   411	void delete_binary(ALIAS_BINARY *now)
+   412	{
+   413		if(now != NULL){
+   414			delete_binary(now->left);
+   415			delete_binary(now->right);
+   416			free(now);
+   417		}
+   418	}
+   419	
+   420	/*----------------------------------------------------------------------------
+   421	 *
+   422	 *  関数名   : parse
+   423	 *
+   424	 *  作業内容 : バッファ内のコマンドと引数を解析する
+   425	 *
+   426	 *  引数	 :
+   427	 *
+   428	 *  返り値   : コマンドの状態を表す :
+   429	 *				0 : フォアグラウンドで実行
+   430	 *				1 : バックグラウンドで実行
+   431	 *				2 : シェルの終了
+   432	 *				3 : 何もしない
+   433	 *
+   434	 *  注意	 :
+   435	 *
+   436	 *--------------------------------------------------------------------------*/
+   437	
+   438	int parse(char buffer[],		/* バッファ */
+   439			  char *args[])			/* 引数へのポインタ配列 */
+   440	{
+   441		int arg_index;   /* 引数用のインデックス */
+   442		int status;   /* コマンドの状態を表す */
+   443	
+   444		char *args_temp[COMMANDLEN];
+   445		char wild_card[WILDCARDNUM][DIRLEN];
+   446		
+   447		DIR *dir;
+   448		struct dirent *dp;
+   449		/*
+   450		 *  変数の初期化
+   451		 */
+   452	
+   453		arg_index = 0;
+   454		status = 0;
+   455	
+   456		/*
+   457		 *  バッファが終了を表すコマンド（"exit"）ならば
+   458		 *  コマンドの状態を表す返り値を 2 に設定してリターンする
+   459		 */
+   460	
+   461		if(strcmp(buffer, "exit") == 0) {
+   462			status = 2;
+   463			return status;
+   464		}
+   465		
+   466		/*
+   467		 *  バッファ内の文字がなくなるまで繰り返す
+   468		 *  （ヌル文字が出てくるまで繰り返す）
+   469		 */
+   470	
+   471		while(*buffer != '\0') {
+   472	
+   473			/*
+   474			 *  空白類（空白とタブ）をヌル文字に置き換える
+   475			 *  これによってバッファ内の各引数が分割される
+   476			 */
+   477	
+   478			while(*buffer == ' ' || *buffer == '\t') {
+   479				*(buffer++) = '\0';
+   480			}
+   481	
+   482			/*
+   483			 * 空白の後が終端文字であればループを抜ける
+   484			 */
+   485	
+   486			if(*buffer == '\0') {
+   487				break;
+   488			}
+   489	
+   490			/*
+   491			 *  空白部分は読み飛ばされたはず
+   492			 *  buffer は現在は arg_index + 1 個めの引数の先頭を指している
+   493			 *
+   494			 *  引数の先頭へのポインタを引数へのポインタ配列に格納する
+   495			 */
+   496	
+   497			args[arg_index] = buffer;
+   498			++arg_index;
+   499	
+   500			/*
+   501			 *  引数部分を読み飛ばす
+   502			 *  （ヌル文字でも空白類でもない場合に読み進める）
+   503			 */
+   504	
+   505			while((*buffer != '\0') && (*buffer != ' ') && (*buffer != '\t')) {
+   506				++buffer;
+   507			}
+   508		}
+   509	
+   510		/*
+   511		 *  最後の引数の次にはヌルへのポインタを格納する
+   512		 */
+   513	
+   514		args[arg_index] = NULL;
+   515	
+   516		/*
+   517		 *  最後の引数をチェックして "&" ならば
+   518		 *
+   519		 *  "&" を引数から削る
+   520		 *  コマンドの状態を表す status に 1 を設定する
+   521		 *
+   522		 *  そうでなければ status に 0 を設定する
+   523		 */
+   524	
+   525		if(arg_index > 0 && strcmp(args[arg_index - 1], "&") == 0) {
+   526			--arg_index;
+   527			args[arg_index] = '\0';
+   528			status = 1;
+   529		} else {
+   530			status = 0;
+   531		}
+   532	
+   533		/*
+   534		 *  引数が何もなかった場合
+   535		 */
+   536	
+   537		if(arg_index == 0) {
+   538			status = 3;
+   539		}
+   540	
+   541		if(arg_index > 0){				//ワイルドカード機能
+   542	
+   543			int i=1;
+   544			while(args[i] != NULL && strcmp(args[i], "*") != 0){
+   545			i++;
+   546			}
+   547			if(args[i] != NULL){
+   548				int j=0;
+   549				while(args[i+j] != NULL){
+   550					args_temp[j] = args[i+1+j];
+   551					j++;
+   552				}
+   553				j = 0;
+   554				arg_index = i;
+   555				dir = opendir(".");
+   556				while ((dp = readdir(dir)) != NULL) {
+   557					strcpy(&wild_card[j][0], dp->d_name);
+   558					args[arg_index] = &wild_card[j][0];
+   559					arg_index++;
+   560					j++;
+   561				}
+   562				j = 0;
+   563				while(args_temp[j] != NULL){
+   564					args[arg_index] = args_temp[j];
+   565					arg_index++;
+   566					j++;
+   567				}
+   568				args[arg_index] = NULL;
+   569				closedir(dir);
+   570			}
+   571		}
+   572		
+   573		/*
+   574		 *  コマンドの状態を返す
+   575		 */
+   576	
+   577		return status;
+   578	}
+   579	
+   580	/*----------------------------------------------------------------------------
+   581	 *
+   582	 *  関数名   : execute_command
+   583	 *
+   584	 *  作業内容 : 引数として与えられたコマンドを実行する
+   585	 *			 コマンドの状態がフォアグラウンドならば、コマンドを
+   586	 *			 実行している子プロセスの終了を待つ
+   587	 *			 バックグラウンドならば子プロセスの終了を待たずに
+   588	 *			 main 関数に返る（プロンプト表示に戻る）
+   589	 *
+   590	 *  引数	 :
+   591	 *
+   592	 *  返り値   :
+   593	 *
+   594	 *  注意	 :
+   595	 *
+   596	 *--------------------------------------------------------------------------*/
+   597	
+   598	void execute_command(char *args[],	/* 引数の配列 */
+   599						 int command_status)	 /* コマンドの状態 */
+   600	{
+   601		int pid;	  /* プロセスＩＤ */
+   602		int status;   /* 子プロセスの終了ステータス */
+   603		int wait;
+   604		
+   605		/*
+   606		 *  子プロセスを生成する
+   607		 *
+   608		 *  生成できたかを確認し、失敗ならばプログラムを終了する
+   609		 */
+   610	
+   611		/******** Your Program ********/
+   612		pid = fork();
+   613		if (pid < 0){
+   614			printf("fork failure\n");
+   615			exit(EXIT_FAILURE);
+   616		}
+   617	
+   618		/*
+   619		 *  子プロセスの場合には引数として与えられたものを実行する
+   620		 *
+   621		 *  引数の配列は以下を仮定している
+   622		 *  ・第１引数には実行されるプログラムを示す文字列が格納されている
+   623		 *  ・引数の配列はヌルポインタで終了している
+   624		 */
+   625	
+   626		/******** Your Program ********/
+   627		else if(pid == 0){
+   628			execvp(args[0],args);
+   629			exit(EXIT_SUCCESS); 
+   630		}
+   631	
+   632		/*
+   633		 *  コマンドの状態がバックグラウンドなら関数を抜ける
+   634		 */
+   635	
+   636		/******** Your Program ********/
+   637		else{
+   638			if(command_status == 1)
+   639				return;
+   640	
+   641		/*
+   642		 *  ここにくるのはコマンドの状態がフォアグラウンドの場合
+   643		 *
+   644		 *  親プロセスの場合に子プロセスの終了を待つ
+   645		 */
+   646	
+   647		/******** Your Program ********/
+   648			int wait = waitpid(pid, &status, 0); //子プロセスのプロセスIDを指定して、終了を待つ
+   649			if(wait < 0){
+   650				printf("wait failure\n");
+   651				exit(EXIT_FAILURE);
+   652			}
+   653		}
+   654		
+   655		return;
+   656	}
+   657	/*-- END OF FILE -----------------------------------------------------------*/

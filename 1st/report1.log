@@ -1,0 +1,327 @@
+This is e-pTeX, Version 3.14159265-p3.6-141210-2.6 (utf8.sjis) (TeX Live 2015/W32TeX) (preloaded format=platex 2015.5.19)  9 JUN 2016 01:23
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**./report1.tex
+(./report1.tex
+pLaTeX2e <2006/11/10> (based on LaTeX2e <2015/01/01> patch level 0)
+Babel <3.9l> and hyphenation patterns for 79 languages loaded.
+(./procreport.cls
+Document Class: procreport 
+(c:/w32tex/share/texmf-dist/tex/platex/base/jarticle.cls
+Document Class: jarticle 2006/06/27 v1.6 Standard pLaTeX class
+\c@@paper=\count81
+(c:/w32tex/share/texmf-dist/tex/latex/base/fleqn.clo
+File: fleqn.clo 2015/03/31 v1.1i Standard LaTeX option (flush left equations)
+\mathindent=\dimen118
+Applying: [2015/01/01] Make \[ robust on input line 50.
+LaTeX Info: Redefining \[ on input line 51.
+Already applied: [0000/00/00] Make \[ robust on input line 62.
+Applying: [2015/01/01] Make \] robust on input line 74.
+LaTeX Info: Redefining \] on input line 75.
+Already applied: [0000/00/00] Make \] robust on input line 83.
+)
+(c:/w32tex/share/texmf-dist/tex/platex/base/jsize10.clo
+File: jsize10.clo 2006/06/27 v1.6 Standard pLaTeX file (size option)
+)
+\c@part=\count82
+\c@section=\count83
+\c@subsection=\count84
+\c@subsubsection=\count85
+\c@paragraph=\count86
+\c@subparagraph=\count87
+\c@figure=\count88
+\c@table=\count89
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\symmincho=\mathgroup4
+LaTeX Font Info:    Overwriting symbol font `mincho' in version `bold'
+(Font)                  JY1/mc/m/n --> JY1/gt/m/n on input line 601.
+\toclineskip=\dimen119
+\@lnumwidth=\dimen120
+\bibindent=\dimen121
+\heisei=\count90
+)
+(c:/w32tex/share/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2010/09/12 v5.6 Page Geometry
+
+(c:/w32tex/share/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks15
+)
+(c:/w32tex/share/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is not detected.
+)
+(c:/w32tex/share/texmf-dist/tex/generic/oberdiek/ifvtex.sty
+Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
+Package ifvtex Info: VTeX not detected.
+)
+(c:/w32tex/share/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+\Gm@cnth=\count91
+\Gm@cntv=\count92
+\c@Gm@tempcnt=\count93
+\Gm@bindingoffset=\dimen122
+\Gm@wd@mp=\dimen123
+\Gm@odd@mp=\dimen124
+\Gm@even@mp=\dimen125
+\Gm@layoutwidth=\dimen126
+\Gm@layoutheight=\dimen127
+\Gm@layouthoffset=\dimen128
+\Gm@layoutvoffset=\dimen129
+\Gm@dimlist=\toks16
+
+(c:/w32tex/share/texmf-dist/tex/latex/geometry/geometry.cfg))
+(c:/w32tex/share/texmf-dist/tex/latex/psnfss/times.sty
+Package: times 2005/04/12 PSNFSS-v9.2a (SPQR) 
+))
+(c:/w32tex/share/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+(c:/w32tex/share/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2014/10/28 v1.0p Standard LaTeX Graphics (DPC,SPQR)
+
+(c:/w32tex/share/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(c:/w32tex/share/texmf-dist/tex/latex/config/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: dvipdfm.def on input line 94.
+
+(c:/w32tex/share/texmf-dist/tex/latex/dvipdfm-def/dvipdfm.def
+File: dvipdfm.def 1999/9/6 vx.x Driver-dependant file
+))
+\Gin@req@height=\dimen130
+\Gin@req@width=\dimen131
+)
+(c:/w32tex/share/texmf-dist/tex/platex/base/ascmac.sty
+(c:/w32tex/share/texmf-dist/tex/platex/base/tascmac.sty
+\@savetbaselineshift=\dimen132
+\@saveybaselineshift=\dimen133
+\scb@x=\box41
+\scscb@x=\box42
+\@bw=\dimen134
+\@nbox=\box43
+\@nbody=\box44
+\@scw=\dimen135
+\@itemh=\dimen136
+\@iboxpos=\toks17
+\@iboxstr=\box45
+\@bwsp=\box46
+\@@bwsp=\box47
+\@bcal=\count94
+\shaderule=\dimen137
+))
+(c:/w32tex/share/texmf-dist/tex/latex/moreverb/moreverb.sty
+Package: moreverb 2008/06/03 v2.3a `more' verbatim facilities
+
+(c:/w32tex/share/texmf-dist/tex/latex/tools/verbatim.sty
+Package: verbatim 2014/10/28 v1.5q LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks18
+\verbatim@line=\toks19
+\verbatim@in@stream=\read1
+)
+\tab@position=\count95
+\tab@size=\count96
+\listing@line=\count97
+) (./report1.aux)
+\openout1 = `report1.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+
+(I search kanjifont definition file: . . ) (I search font definition file: . .
+. . . . . )
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 16.
+ (c:/w32tex/share/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
+*geometry* detected driver: dvipdfm
+*geometry* verbose mode - [ preamble ] result:
+* driver: dvipdfm
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* hratio: 1:1
+* vratio: 1:1
+* modes: 
+* h-part:(L,W,R)=(71.1319pt, 455.24408pt, 71.1319pt)
+* v-part:(T,H,B)=(81.09035pt, 682.86613pt, 81.09036pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=455.24408pt
+* \textheight=682.86613pt
+* \oddsidemargin=-1.13809pt
+* \evensidemargin=-1.13809pt
+* \topmargin=-28.17964pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=7.77588pt
+* \footskip=30.0pt
+* \marginparwidth=106.0pt
+* \marginparsep=10.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+[1
+
+]
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <14.4> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 19.
+LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <14.4> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 19.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 19.
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <12> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 20.
+LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <12> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 20.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 20.
+ (I search kanjifont definition file: . . ) (I search font definition file:
+. . . . . . . )
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 32.
+ (c:/w32tex/share/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+)
+[1]
+Overfull \hbox (1.50024pt too wide) in paragraph at lines 69--69
+[]        \OT1/pcr/m/n/10 echo "<a href=\"#${i}\">${c} ${i}</a><br>" >> ${tmpfi
+le2}       #\JY1/mc/m/n/10 追加
+ []
+
+
+Overfull \hbox (1.50024pt too wide) in paragraph at lines 75--75
+[]        \OT1/pcr/m/n/10 echo "<h2><a name=\"${i}\">${c} ${i}</a></h2>" >> ${t
+mpfile2}   #\JY1/mc/m/n/10 追加
+ []
+
+[2]
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 99.
+ (c:/w32tex/share/texmf-dist/tex/latex/psnfss/omsptm.fd
+File: omsptm.fd 
+)
+LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 99.
+ [3]
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <10> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 133.
+LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <10> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 133.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 133.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 182.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 182.
+ [4] [5]
+[6] [7] [8]
+File: group-A-1.png Graphic file (type bmp)
+ <group-A-1.png> [9] [10]
+Overfull \hbox (16.86673pt too wide) in paragraph at lines 346--346
+[]    \OT1/pcr/m/n/10 74  &$team[0][0]&$team[1][0]&$team[2][0]&$team[3][0]&\\pb
+ox<t>{\JY1/mc/m/n/10 勝ち試合数\OT1/pcr/m/n/10 }&\\[] 
+ []
+
+
+Overfull \hbox (6.75592pt too wide) in paragraph at lines 349--349
+[]    \OT1/pcr/m/n/10 76  \\multirow{2}{*}{$team[0][0]}&&$team[0][2]&$team[0][4
+]&$team[0][6]&\\[] 
+ []
+
+
+Overfull \hbox (6.75592pt too wide) in paragraph at lines 354--354
+[]    \OT1/pcr/m/n/10 79  \\multirow{2}{*}{$team[1][0]}&$team[1][1]&&$team[1][4
+]&$team[1][6]&\\[] 
+ []
+
+
+Overfull \hbox (6.75592pt too wide) in paragraph at lines 359--359
+[]    \OT1/pcr/m/n/10 82  \\multirow{2}{*}{$team[2][0]}&$team[2][1]&$team[2][3]
+&&$team[2][6]&\\[] 
+ []
+
+
+Overfull \hbox (6.75592pt too wide) in paragraph at lines 364--364
+[]    \OT1/pcr/m/n/10 85  \\multirow{2}{*}{$team[3][0]}&$team[3][1]&$team[3][3]
+&$team[3][5]&&\\[] 
+ []
+
+[11] [12]
+Overfull \hbox (16.86673pt too wide) in paragraph at lines 426--426
+[]   \OT1/pcr/m/n/10 145  &$team[0][0]&$team[1][0]&$team[2][0]&$team[3][0]&\\pb
+ox<t>{\JY1/mc/m/n/10 勝ち試合数\OT1/pcr/m/n/10 }&\\[] 
+ []
+
+
+Overfull \hbox (6.75592pt too wide) in paragraph at lines 429--429
+[]   \OT1/pcr/m/n/10 147  \\multirow{2}{*}{$team[0][0]}&&$team[0][2]&$team[0][4
+]&$team[0][6]&\\[] 
+ []
+
+
+Overfull \hbox (6.75592pt too wide) in paragraph at lines 434--434
+[]   \OT1/pcr/m/n/10 150  \\multirow{2}{*}{$team[1][0]}&$team[1][1]&&$team[1][4
+]&$team[1][6]&\\[] 
+ []
+
+
+Overfull \hbox (6.75592pt too wide) in paragraph at lines 439--439
+[]   \OT1/pcr/m/n/10 153  \\multirow{2}{*}{$team[2][0]}&$team[2][1]&$team[2][3]
+&&$team[2][6]&\\[] 
+ []
+
+
+Overfull \hbox (6.75592pt too wide) in paragraph at lines 444--444
+[]   \OT1/pcr/m/n/10 156  \\multirow{2}{*}{$team[3][0]}&$team[3][1]&$team[3][3]
+&$team[3][5]&&\\[] 
+ []
+
+[13]
+Overfull \hbox (6.75592pt too wide) in paragraph at lines 489--489
+[]    \OT1/pcr/m/n/10 24  $insert = $top->Button(-text => 'Insert', -command =>
+ \&insert_text);[] 
+ []
+
+[14]
+Overfull \hbox (6.75592pt too wide) in paragraph at lines 512--512
+[]    \OT1/pcr/m/n/10 47                                -yscrollcommand => ['se
+t' => $scroll]);[] 
+ []
+
+[15] [16] (./report1.aux) ) 
+Here is how much of TeX's memory you used:
+ 1340 strings out of 493777
+ 17939 string characters out of 6153182
+ 93016 words of memory out of 5000000
+ 4822 multiletter control sequences out of 15000+600000
+ 12797 words of font info for 46 fonts, out of 8000000 for 9000
+ 929 hyphenation exceptions out of 8191
+ 31i,5n,33p,782b,341s stack positions out of 5000i,500n,10000p,500000b,80000s
+
+Output written on report1.dvi (17 pages, 33240 bytes).

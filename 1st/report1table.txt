@@ -1,0 +1,169 @@
+     1	﻿#!/usr/local/bin/perl
+     2	
+     3	$i=0;
+     4	for($m=0;$m<@ARGV;$m++){
+     5		if($ARGV[$m]!="[A-H]"){
+     6			print"Error(incorrect letter)\n";
+     7			$i=1;
+     8		}
+     9	}
+    10	
+    11	if($i==0){
+    12		if(@ARGV){
+    13			@al=@ARGV;
+    14		}
+    15		else{
+    16			@al=(A,B,C,D,E,F,G,H);
+    17		}
+    18	
+    19		$name=join("" , @al);
+    20	
+    21		open(TABLE,"< group$al[0]");
+    22		@line=<TABLE>;
+    23		close(TABLE);
+    24	
+    25		chomp($line[0]);
+    26		chomp($line[2]);
+    27	
+    28		for($i=0;$i<4;$i++){
+    29			foreach(@team[$i]){
+    30				$_=[split(/\s+/,$line[$i+4])];
+    31			}
+    32		}
+    33	
+    34		for($i=0;$i<4;$i++){
+    35			$team[$i][0]=~ s/[_]/\\_/g;
+    36		}
+    37	
+    38		@data=(
+    39			[0,0,0],
+    40			[0,0,0],
+    41			[0,0,0],
+    42			[0,0,0]
+    43		);
+    44	#nチーム目の[勝ち数,負け数,引き分け数]
+    45	
+    46		for($i=0;$i<4;$i++){	#各行に対して勝ち負け引き分けを表す文字を記号で当てる
+    47			for($k=0;$k<8;$k++){
+    48				if($team[$i][$k]=~/^W$/){
+    49					$team[$i][$k]="\○";
+    50					$data[$i][0]++;
+    51				}
+    52				elsif($team[$i][$k]=~/^L$/){
+    53					$team[$i][$k]="\×";
+    54					$data[$i][1]++;
+    55				}
+    56				elsif($team[$i][$k]=~/^D$/){
+    57					$team[$i][$k]="\△";
+    58					$data[$i][2]++;
+    59				}
+    60			}
+    61		}
+    62	
+    63		open(TEX,"> group-$name.tex");
+    64		print TEX <<"EOT";	#texファイルの内容
+    65	\\documentclass[a4j,titlepage]{jarticle}
+    66	\\usepackage{multirow}
+    67	\\usepackage{plext}
+    68	\\begin{document}
+    69	\\begin{table}[htb]
+    70	\\begin{center}
+    71	\\underline{$line[0]- $line[2] -}
+    72	\\begin{tabular}{|c|c|c|c|c|c|c|c|}
+    73	\\hline
+    74	&$team[0][0]&$team[1][0]&$team[2][0]&$team[3][0]&\\pbox<t>{勝ち試合数}&\\pbox<t>{引き分け試合数}&\\pbox<t>{負け試合数}\\\\
+    75	\\hline
+    76	\\multirow{2}{*}{$team[0][0]}&&$team[0][2]&$team[0][4]&$team[0][6]&\\multirow{2}{*}{$data[0][0]}&\\multirow{2}{*}{$data[0][2]}&\\multirow{2}{*}{$data[0][1]}\\\\
+    77	&&$team[0][3]&$team[0][5]&$team[0][7]&&&\\\\
+    78	\\hline
+    79	\\multirow{2}{*}{$team[1][0]}&$team[1][1]&&$team[1][4]&$team[1][6]&\\multirow{2}{*}{$data[1][0]}&\\multirow{2}{*}{$data[1][2]}&\\multirow{2}{*}{$data[1][1]}\\\\
+    80	&$team[1][2]&&$team[1][5]&$team[1][7]&&&\\\\
+    81	\\hline
+    82	\\multirow{2}{*}{$team[2][0]}&$team[2][1]&$team[2][3]&&$team[2][6]&\\multirow{2}{*}{$data[2][0]}&\\multirow{2}{*}{$data[2][2]}&\\multirow{2}{*}{$data[2][1]}\\\\
+    83	&$team[2][2]&$team[2][4]&&$team[2][7]&&&\\\\
+    84	\\hline
+    85	\\multirow{2}{*}{$team[3][0]}&$team[3][1]&$team[3][3]&$team[3][5]&&\\multirow{2}{*}{$data[3][0]}&\\multirow{2}{*}{$data[3][2]}&\\multirow{2}{*}{$data[3][1]}\\\\
+    86	&$team[3][2]&$team[3][4]&$team[3][6]&&&&\\\\
+    87	\\hline
+    88	\\end{tabular}
+    89	\\end{center}
+    90	\\end{table}
+    91	EOT
+    92		close(TEX);
+    93	
+    94		for($m=1;$m<@al;$m++){
+    95			open(TABLE,"< group$al[$m]");
+    96			@line=<TABLE>;
+    97			close(TABLE);
+    98	
+    99			chomp($line[0]);
+   100			chomp($line[2]);
+   101	
+   102			for($i=0;$i<4;$i++){
+   103				foreach(@team[$i]){
+   104					$_=[split(/\s+/,$line[$i+4])];
+   105				}
+   106			}
+   107	
+   108			for($i=0;$i<4;$i++){
+   109				$team[$i][0]=~ s/[_]/\\_/g;
+   110			}
+   111	
+   112			@data=(
+   113				[0,0,0],
+   114				[0,0,0],
+   115				[0,0,0],
+   116				[0,0,0]
+   117			);
+   118	#nチーム目の[勝ち数,負け数,引き分け数]
+   119	
+   120			for($i=0;$i<4;$i++){
+   121				for($k=0;$k<8;$k++){
+   122					if($team[$i][$k]=~/^W$/){
+   123						$team[$i][$k]="\○";
+   124						$data[$i][0]++;
+   125					}
+   126					elsif($team[$i][$k]=~/^L$/){
+   127						$team[$i][$k]="\×";
+   128						$data[$i][1]++;
+   129					}
+   130					elsif($team[$i][$k]=~/^D$/){
+   131						$team[$i][$k]="\△";
+   132						$data[$i][2]++;
+   133					}
+   134				}
+   135			}
+   136	
+   137			open(TEX,">> group-$name.tex");
+   138			print TEX <<"EOT";
+   139	\\newpage
+   140	\\begin{table}[htb]
+   141	\\begin{center}
+   142	\\underline{$line[0]- $line[2] -}
+   143	\\begin{tabular}{|c|c|c|c|c|c|c|c|}
+   144	\\hline
+   145	&$team[0][0]&$team[1][0]&$team[2][0]&$team[3][0]&\\pbox<t>{勝ち試合数}&\\pbox<t>{引き分け試合数}&\\pbox<t>{負け試合数}\\\\
+   146	\\hline
+   147	\\multirow{2}{*}{$team[0][0]}&&$team[0][2]&$team[0][4]&$team[0][6]&\\multirow{2}{*}{$data[0][0]}&\\multirow{2}{*}{$data[0][2]}&\\multirow{2}{*}{$data[0][1]}\\\\
+   148	&&$team[0][3]&$team[0][5]&$team[0][7]&&&\\\\
+   149	\\hline
+   150	\\multirow{2}{*}{$team[1][0]}&$team[1][1]&&$team[1][4]&$team[1][6]&\\multirow{2}{*}{$data[1][0]}&\\multirow{2}{*}{$data[1][2]}&\\multirow{2}{*}{$data[1][1]}\\\\
+   151	&$team[1][2]&&$team[1][5]&$team[1][7]&&&\\\\
+   152	\\hline
+   153	\\multirow{2}{*}{$team[2][0]}&$team[2][1]&$team[2][3]&&$team[2][6]&\\multirow{2}{*}{$data[2][0]}&\\multirow{2}{*}{$data[2][2]}&\\multirow{2}{*}{$data[2][1]}\\\\
+   154	&$team[2][2]&$team[2][4]&&$team[2][7]&&&\\\\
+   155	\\hline
+   156	\\multirow{2}{*}{$team[3][0]}&$team[3][1]&$team[3][3]&$team[3][5]&&\\multirow{2}{*}{$data[3][0]}&\\multirow{2}{*}{$data[3][2]}&\\multirow{2}{*}{$data[3][1]}\\\\
+   157	&$team[3][2]&$team[3][4]&$team[3][6]&&&&\\\\
+   158	\\hline
+   159	\\end{tabular}
+   160	\\end{center}
+   161	\\end{table}
+   162	EOT
+   163			close(TEX);
+   164		}
+   165	
+   166		open(TEX,">> group-$name.tex");
+   167		print TEX "\\end{document}";
+   168		close(TEX);
+   169	}
